@@ -11951,13 +11951,38 @@ var _elm_lang$html$Html$summary = _elm_lang$html$Html$node('summary');
 var _elm_lang$html$Html$menuitem = _elm_lang$html$Html$node('menuitem');
 var _elm_lang$html$Html$menu = _elm_lang$html$Html$node('menu');
 
-var _user$project$Main$main = _elm_lang$virtual_dom$Native_VirtualDom.staticProgram(
-	_elm_lang$html$Html$text('Hello, World!'));
+var _user$project$Penny$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{ctor: '[]'});
+};
+var _user$project$Penny$subs = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$Penny$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		return A2(
+			_elm_lang$core$Platform_Cmd_ops['!'],
+			model,
+			{ctor: '[]'});
+	});
+var _user$project$Penny$init = function (_p1) {
+	return A2(
+		_elm_lang$core$Platform_Cmd_ops['!'],
+		{},
+		{ctor: '[]'});
+};
+var _user$project$Penny$main = _elm_lang$html$Html$programWithFlags(
+	{view: _user$project$Penny$view, init: _user$project$Penny$init, update: _user$project$Penny$update, subscriptions: _user$project$Penny$subs})(_elm_lang$core$Json_Decode$string);
+var _user$project$Penny$Model = {};
+var _user$project$Penny$NoOp = {ctor: 'NoOp'};
 
 var Elm = {};
-Elm['Main'] = Elm['Main'] || {};
-if (typeof _user$project$Main$main !== 'undefined') {
-    _user$project$Main$main(Elm['Main'], 'Main', {"types":{"unions":{},"aliases":{},"message":"msg"},"versions":{"elm":"0.18.0"}});
+Elm['Penny'] = Elm['Penny'] || {};
+if (typeof _user$project$Penny$main !== 'undefined') {
+    _user$project$Penny$main(Elm['Penny'], 'Penny', {"types":{"unions":{"Penny.Msg":{"args":[],"tags":{"NoOp":[]}}},"aliases":{},"message":"Penny.Msg"},"versions":{"elm":"0.18.0"}});
 }
 
 if (typeof define === "function" && define['amd'])

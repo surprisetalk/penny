@@ -23,4 +23,4 @@ import "phoenix_html";
 import Elm from "./penny";
 
 const elmNode = document.querySelector('#elm');
-const app = elmNode && Elm.Main.embed( elmNode );
+const app = elmNode && Elm.Penny.embed( elmNode, "" );
