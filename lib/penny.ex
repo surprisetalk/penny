@@ -1,57 +1,31 @@
 defmodule Penny do
+  use Application
 
-  # TODO: does it make sense to just make this the webserver? consolidate split the services?
-  
-  @moduledoc """
-  TODO
-  """
+  # See http://elixir-lang.org/docs/stable/elixir/Application.html
+  # for more information on OTP Applications
+  def start(_type, _args) do
+    import Supervisor.Spec
 
-  @doc """
-  TODO
+    # Define workers and child supervisors to be supervised
+    children = [
+      # Start the Ecto repository
+      supervisor(Penny.Repo, []),
+      # Start the endpoint when the application starts
+      supervisor(Penny.Endpoint, []),
+      # Start your own worker by calling: Penny.Worker.start_link(arg1, arg2, arg3)
+      # worker(Penny.Worker, [arg1, arg2, arg3]),
+    ]
 
-  ## Examples
-
-      iex> TODO
-      TODO
-
-  """
-  def main(args) do
-    tasks
+    # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
+    # for other strategies and supported options
+    opts = [strategy: :one_for_one, name: Penny.Supervisor]
+    Supervisor.start_link(children, opts)
   end
 
-  # ah, use browser push notifications to ping
-
-  # major use: "nudge" to do good behavior at specific times of the day
-  #   too much time on reddit? tell me to "do nothing"! or watch a lecture!
-  #   not working in a "work" location? push notification!
-  #   on a device late at night? shut that down
-  #   ask for how to proceed when crons (ie maria) get stuck
-  #   track projects' progress, app-usage, sleep, location, etc
-  #   
-
-  # where should the "event log" be stored?
-
-  # http://hostiledeveloper.com/2016/02/24/hey-watch-it-or-how-to-monitor-files-in-elixir.html
-  # https://github.com/synrc/fs
-
-  # rescuetime
-  # http://blog.stephenwolfram.com/2012/03/the-personal-analytics-of-my-life/
-  # https://www.quantifiedbob.com/
-  # https://www.gwern.net/
-
-  # defp parse_args(args) do
-  #   {options, _, _} = OptionParser.parse(args,
-  #     switches: [name: :string]
-  #   )
-  #   options
-  # end
-
-  # def process([]) do
-  #   IO.puts "No arguments given"
-  # end
-
-  # def process(options) do
-  #   IO.puts "Hello #{options[:name]}"
-  # end
-
+  # Tell Phoenix to update the endpoint configuration
+  # whenever the application is updated.
+  def config_change(changed, _new, removed) do
+    Penny.Endpoint.config_change(changed, removed)
+    :ok
+  end
 end
