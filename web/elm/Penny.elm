@@ -128,6 +128,8 @@ subs model = Sub.none
 
 -- VIEW ------------------------------------------------------------------------
 
+-- TODO: use timers to show long we've been doing a thing
+
 view : Model -> Html Msg
 view {mode,tasks}
   = let now : Html Msg
