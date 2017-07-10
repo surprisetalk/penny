@@ -11951,12 +11951,121 @@ var _elm_lang$html$Html$summary = _elm_lang$html$Html$node('summary');
 var _elm_lang$html$Html$menuitem = _elm_lang$html$Html$node('menuitem');
 var _elm_lang$html$Html$menu = _elm_lang$html$Html$node('menu');
 
-var _user$project$Penny$view = function (model) {
+var _elm_lang$html$Html_Events$keyCode = A2(_elm_lang$core$Json_Decode$field, 'keyCode', _elm_lang$core$Json_Decode$int);
+var _elm_lang$html$Html_Events$targetChecked = A2(
+	_elm_lang$core$Json_Decode$at,
+	{
+		ctor: '::',
+		_0: 'target',
+		_1: {
+			ctor: '::',
+			_0: 'checked',
+			_1: {ctor: '[]'}
+		}
+	},
+	_elm_lang$core$Json_Decode$bool);
+var _elm_lang$html$Html_Events$targetValue = A2(
+	_elm_lang$core$Json_Decode$at,
+	{
+		ctor: '::',
+		_0: 'target',
+		_1: {
+			ctor: '::',
+			_0: 'value',
+			_1: {ctor: '[]'}
+		}
+	},
+	_elm_lang$core$Json_Decode$string);
+var _elm_lang$html$Html_Events$defaultOptions = _elm_lang$virtual_dom$VirtualDom$defaultOptions;
+var _elm_lang$html$Html_Events$onWithOptions = _elm_lang$virtual_dom$VirtualDom$onWithOptions;
+var _elm_lang$html$Html_Events$on = _elm_lang$virtual_dom$VirtualDom$on;
+var _elm_lang$html$Html_Events$onFocus = function (msg) {
 	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{ctor: '[]'});
+		_elm_lang$html$Html_Events$on,
+		'focus',
+		_elm_lang$core$Json_Decode$succeed(msg));
 };
+var _elm_lang$html$Html_Events$onBlur = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'blur',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onSubmitOptions = _elm_lang$core$Native_Utils.update(
+	_elm_lang$html$Html_Events$defaultOptions,
+	{preventDefault: true});
+var _elm_lang$html$Html_Events$onSubmit = function (msg) {
+	return A3(
+		_elm_lang$html$Html_Events$onWithOptions,
+		'submit',
+		_elm_lang$html$Html_Events$onSubmitOptions,
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onCheck = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'change',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetChecked));
+};
+var _elm_lang$html$Html_Events$onInput = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'input',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetValue));
+};
+var _elm_lang$html$Html_Events$onMouseOut = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseout',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseOver = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseover',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseLeave = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseleave',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseEnter = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseenter',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseUp = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseup',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseDown = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mousedown',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onDoubleClick = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'dblclick',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onClick = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'click',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$Options = F2(
+	function (a, b) {
+		return {stopPropagation: a, preventDefault: b};
+	});
+
 var _user$project$Penny$subs = function (model) {
 	return _elm_lang$core$Platform_Sub$none;
 };
@@ -11968,21 +12077,261 @@ var _user$project$Penny$update = F2(
 			model,
 			{ctor: '[]'});
 	});
+var _user$project$Penny$Model = F2(
+	function (a, b) {
+		return {mode: a, tasks: b};
+	});
+var _user$project$Penny$Notification = {};
+var _user$project$Penny$Sleep = {ctor: 'Sleep'};
+var _user$project$Penny$Read = {ctor: 'Read'};
+var _user$project$Penny$Journal = {ctor: 'Journal'};
+var _user$project$Penny$Automate = {ctor: 'Automate'};
+var _user$project$Penny$Review = {ctor: 'Review'};
+var _user$project$Penny$Consume = {ctor: 'Consume'};
+var _user$project$Penny$Connect = {ctor: 'Connect'};
+var _user$project$Penny$Work = {ctor: 'Work'};
+var _user$project$Penny$Learn = {ctor: 'Learn'};
+var _user$project$Penny$Create = {ctor: 'Create'};
+var _user$project$Penny$Strategize = {ctor: 'Strategize'};
+var _user$project$Penny$Inspire = {ctor: 'Inspire'};
+var _user$project$Penny$Groom = {ctor: 'Groom'};
+var _user$project$Penny$Fuel = {ctor: 'Fuel'};
+var _user$project$Penny$Exercise = {ctor: 'Exercise'};
+var _user$project$Penny$Tidy = {ctor: 'Tidy'};
+var _user$project$Penny$Naught = {ctor: 'Naught'};
 var _user$project$Penny$init = function (_p1) {
 	return A2(
 		_elm_lang$core$Platform_Cmd_ops['!'],
-		{},
+		{
+			mode: _user$project$Penny$Naught,
+			tasks: {ctor: '[]'}
+		},
 		{ctor: '[]'});
+};
+var _user$project$Penny$Frolic = {ctor: 'Frolic'};
+var _user$project$Penny$Task_ = function (a) {
+	return {ctor: 'Task_', _0: a};
+};
+var _user$project$Penny$Chore = F2(
+	function (a, b) {
+		return {ctor: 'Chore', _0: a, _1: b};
+	});
+var _user$project$Penny$Project = {ctor: 'Project'};
+var _user$project$Penny$Study = {ctor: 'Study'};
+var _user$project$Penny$Push = function (a) {
+	return {ctor: 'Push', _0: a};
+};
+var _user$project$Penny$Undo = {ctor: 'Undo'};
+var _user$project$Penny$Skip = {ctor: 'Skip'};
+var _user$project$Penny$view = function (_p2) {
+	var _p3 = _p2;
+	var stats = A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{ctor: '[]'});
+	var now = function () {
+		var _p4 = _p3.mode;
+		switch (_p4.ctor) {
+			case 'Frolic':
+				return _elm_lang$html$Html$text('thank you universe!');
+			case 'Naught':
+				return _elm_lang$html$Html$text('whatever');
+			case 'Tidy':
+				return _elm_lang$html$Html$text('be kind to your stuff!');
+			case 'Exercise':
+				return _elm_lang$html$Html$text('GET BIG');
+			case 'Fuel':
+				return A2(
+					_elm_lang$html$Html$ul,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$li,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('eat breakfast'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$li,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('prepare lunch'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$li,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('fetch water'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					});
+			case 'Groom':
+				return A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$ul,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$li,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('floss'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$li,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('brush teeth'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('your teeth are really important :0'),
+							_1: {ctor: '[]'}
+						}
+					});
+			case 'Inspire':
+				return _elm_lang$html$Html$text('inspire yourself!');
+			case 'Strategize':
+				return _elm_lang$html$Html$text('look over your list');
+			case 'Create':
+				return _elm_lang$html$Html$text('make something amazing! and make it quick & messy');
+			case 'Learn':
+				return _elm_lang$html$Html$text('learn something');
+			case 'Work':
+				return _elm_lang$html$Html$text('do your chores');
+			case 'Connect':
+				return _elm_lang$html$Html$text('remind somebody how much they mean to you!');
+			case 'Consume':
+				return _elm_lang$html$Html$text('loaf!');
+			case 'Review':
+				return _elm_lang$html$Html$text('what have you done lately?');
+			case 'Automate':
+				return A2(
+					_elm_lang$html$Html$ul,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$li,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('what 20% of today caused 80% of headaches?'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$li,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('what useless things did we do?'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					});
+			case 'Journal':
+				return _elm_lang$html$Html$text('what made you feel today?');
+			case 'Read':
+				return _elm_lang$html$Html$text('read something good!');
+			default:
+				return _elm_lang$html$Html$text('zzzzzzzz');
+		}
+	}();
+	return A2(
+		_elm_lang$html$Html$main_,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: now,
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$aside,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: stats,
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$button,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(_user$project$Penny$Skip),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('skip'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Events$onClick(_user$project$Penny$Undo),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('undo'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
 };
 var _user$project$Penny$main = _elm_lang$html$Html$programWithFlags(
 	{view: _user$project$Penny$view, init: _user$project$Penny$init, update: _user$project$Penny$update, subscriptions: _user$project$Penny$subs})(_elm_lang$core$Json_Decode$string);
-var _user$project$Penny$Model = {};
 var _user$project$Penny$NoOp = {ctor: 'NoOp'};
 
 var Elm = {};
 Elm['Penny'] = Elm['Penny'] || {};
 if (typeof _user$project$Penny$main !== 'undefined') {
-    _user$project$Penny$main(Elm['Penny'], 'Penny', {"types":{"unions":{"Penny.Msg":{"args":[],"tags":{"NoOp":[]}}},"aliases":{},"message":"Penny.Msg"},"versions":{"elm":"0.18.0"}});
+    _user$project$Penny$main(Elm['Penny'], 'Penny', {"types":{"unions":{"Penny.Msg":{"args":[],"tags":{"Skip":[],"Undo":[],"Push":["Penny.Notification"],"NoOp":[]}}},"aliases":{"Penny.Notification":{"args":[],"type":"{}"}},"message":"Penny.Msg"},"versions":{"elm":"0.18.0"}});
 }
 
 if (typeof define === "function" && define['amd'])

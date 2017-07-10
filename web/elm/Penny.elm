@@ -38,6 +38,7 @@ type alias Model
 type Mode
   = Frolic     -- Prepare
   | Naught     
+  | Tidy
   | Exercise   
   | Fuel
   | Groom
@@ -68,28 +69,6 @@ type Kind
   | Project
   | Chore Bool   Bool
     --    urgent important
-
--- type alias Model
---   = { events  : List Event
---     , metrics : Metrics
---     }
-
--- type alias Metrics
---   = {
---     }
-
--- type alias Event
---   = { when : Date
---     , what : What
---     }
-
--- type What = Woke
---           | Moved
---           | Committed Project
-
-type alias Notification
-  = {}
-    -- TODO
 
 
 -- INIT ------------------------------------------------------------------------
@@ -149,6 +128,16 @@ view {mode,tasks}
             Naught ->
 
               text "whatever"
+
+
+            Tidy ->
+
+              -- TODO: 5:00 countdown
+              -- TODO: prompts (with checkboxes if completed)
+              -- TODO:   get rid of something!
+              -- TODO:   etc
+
+              text "be kind to your stuff!"
               
 
             Exercise ->
@@ -228,7 +217,7 @@ view {mode,tasks}
 
             Connect ->
 
-              -- TODO: call list, letters list, smss, emails
+              -- TODO: call list, letters list, smss, emails, make a craft for somebody
 
               text "remind somebody how much they mean to you!"
               

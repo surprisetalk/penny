@@ -20,7 +20,10 @@ defmodule Penny.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Penny do
-  #   pipe_through :api
-  # end
+  scope "/api", Penny do
+    pipe_through :api
+
+    resources "/tasks", TaskController, except: [:new, :edit]
+    resources "/mode", Mode.EventController, only: [:index, :create]
+  end
 end
