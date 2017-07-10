@@ -13,6 +13,12 @@ import Html.Events exposing (..)
 
 -- import Date exposing ( Date )
 
+import Http
+
+import Json.Decode as JD exposing ( Decoder )
+
+import String exposing ( toLower )
+
 
 -- PORTS -----------------------------------------------------------------------
 
@@ -70,6 +76,9 @@ type Kind
   | Chore Bool   Bool
     --    urgent important
 
+type alias Notification
+  = {} -- TODO
+
 
 -- INIT ------------------------------------------------------------------------
 
@@ -77,14 +86,17 @@ init : String -> ( Model, Cmd Msg )
 init _
   = { mode  = Naught
     , tasks = []
-    } ! []
-
+    }
+  ! [ Http.get "http://localhost:4000/api/mode" decodeMode
+        |> Http.send ModeFetch
+    ]
 
 -- MSG -------------------------------------------------------------------------
 
 type Msg = NoOp
          | Skip              
          | Undo             
+         | ModeFetch (Result Http.Error Mode)
          | Push Notification -- TODO: push notification
 
 
@@ -93,6 +105,10 @@ type Msg = NoOp
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model
   = case msg of
+
+      ModeFetch (Ok mode) ->
+
+        { model | mode = mode } ! []
 
       _ ->
 
@@ -288,6 +304,36 @@ view {mode,tasks}
          ]
        ]
           
+
+-- JSON ------------------------------------------------------------------------
+
+decodeMode : Decoder Mode
+decodeMode
+  = JD.field "mode" JD.string
+  |> JD.andThen
+  ( \mode ->
+      case toLower mode of
+        "frolic"     -> JD.succeed Frolic     -- Prepare
+        "naught"     -> JD.succeed Naught     
+        "tidy"       -> JD.succeed Tidy
+        "exercise"   -> JD.succeed Exercise   
+        "fuel"       -> JD.succeed Fuel
+        "groom"      -> JD.succeed Groom
+        "inspire"    -> JD.succeed Inspire
+        "strategize" -> JD.succeed Strategize 
+        "create"     -> JD.succeed Create     -- Queue
+        "learn"      -> JD.succeed Learn
+        "work"       -> JD.succeed Work
+        "connect"    -> JD.succeed Connect
+        "consume"    -> JD.succeed Consume
+        "review"     -> JD.succeed Review     -- Meta
+        "automate"   -> JD.succeed Automate
+        "journal"    -> JD.succeed Journal
+        "read"       -> JD.succeed Read       -- Sleep
+        "sleep"      -> JD.succeed Sleep
+        _            -> JD.fail <| mode ++ " is not a valid mode"
+  )   
+
 
 -- MAIN ------------------------------------------------------------------------
 

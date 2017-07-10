@@ -24,6 +24,6 @@ defmodule Penny.Router do
     pipe_through :api
 
     resources "/tasks", TaskController, except: [:new, :edit]
-    resources "/mode", Mode.EventController, only: [:index, :create]
+    resources "/mode", Mode.EventController, only: [:index, :create, :show]
   end
 end

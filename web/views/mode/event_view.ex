@@ -6,7 +6,7 @@ defmodule Penny.Mode.EventView do
   # end
 
   def render("show.json", %{event: event}) do
-    %{data: render_one(event, Penny.Mode.EventView, "event.json")}
+    render_one(event, Penny.Mode.EventView, "event.json")
   end
 
   def render("event.json", %{event: event}) do
