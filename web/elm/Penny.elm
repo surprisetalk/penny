@@ -216,8 +216,43 @@ view {mode,tasks}
 
             Learn ->
 
-              -- TODO: integrate spaced-repetition quizzes, etc
               -- TODO: studies list & github stuff
+              -- TODO: integrate spaced-repetition quizzes, etc
+              -- TODO:   chinese
+              -- TODO:   music theory
+              -- TODO:     modes
+              -- TODO:     "good" notes (on guitar and piano)
+              -- TODO:     scale relations
+              -- TODO:     ear training
+              -- TODO:   chem
+              -- TODO:     elements
+              -- TODO:     "household" compounds (everyday things)
+              -- TODO:     synthesis calculations
+              -- TODO:     drugs
+              -- TODO:   math (many branches)
+              -- TODO:     equations
+              -- TODO:     short exercices
+              -- TODO:   poetry & quotes
+              -- TODO:   physics
+              -- TODO:   genetics
+              -- TODO:     i don't even know what
+              -- TODO:   cognitive "tools"
+              -- TODO:     math
+              -- TODO:     estimations
+              -- TODO:       "how big?"
+              -- TODO:       "how long?"
+              -- TODO:       "how much energy?"
+              -- TODO:       "how many?"
+              -- TODO:       "how fast?"
+              -- TODO:   biology
+              -- TODO:     anatomy
+              -- TODO:     nutrition
+              -- TODO:     taxonomy
+              -- TODO:   apl syntax hehe
+              -- TODO:   geography
+              -- TODO:     freeways!
+              -- TODO:   electrical
+              -- TODO:     circuit problems
 
               text "learn something"
               
