@@ -22,6 +22,8 @@ import Elm from "./penny";
 import channel from "./socket";
 
 channel.push('mode:get');
+channel.push('tasks:get');
+
 
 const elmNode = document.querySelector('#elm');
 if( elmNode )

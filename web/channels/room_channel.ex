@@ -1,6 +1,7 @@
 defmodule Penny.RoomChannel do
   use Penny.Web, :channel
 
+  alias Penny.Task
   alias Penny.Mode.Event
 
   def join("room:lobby", payload, socket) do
@@ -9,6 +10,23 @@ defmodule Penny.RoomChannel do
     else
       {:error, %{reason: "unauthorized"}}
     end
+  end
+
+  def handle_in("tasks:get", _params, socket) do
+    # case Repo.all(Task) do
+    #   nil ->
+    #     push socket, "tasks", %{"tasks" => []}
+    #     {:reply, {:ok, %{"tasks" => []}}, socket}
+    #   {nil, _} ->
+    #     push socket, "tasks", %{"tasks" => []}
+    #     {:reply, {:ok, %{"tasks" => []}}, socket}
+    #   tasks ->
+    #     push socket, "tasks", %{"tasks" => tasks |> Enum.map(fn(%Task{name: name}) -> %{"name" => name} end) }
+    #     {:reply, {:ok, %{"tasks" => tasks}}, socket}
+    # end
+    # tasks = Task |> Repo.all |> Enum.map(fn(task) -> Map.from_struct(task) end)
+    # push socket, "mode", %{"tasks" => tasks}
+    # {:ok, socket}
   end
 
   def handle_in("mode:get", _params, socket) do
