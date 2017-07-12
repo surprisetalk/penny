@@ -1,4 +1,4 @@
-module Penny exposing (..)
+port module Penny exposing (..)
 
 {-
 
@@ -13,17 +13,24 @@ import Html.Events exposing (..)
 
 -- import Date exposing ( Date )
 
-import Http
+-- import Http
 
 import Json.Decode as JD exposing ( Decoder )
+import Json.Encode as JE
 
 import String exposing ( toLower )
 
 
 -- PORTS -----------------------------------------------------------------------
 
+port mode : (JD.Value -> msg) -> Sub msg
 
--- HEPLERS ---------------------------------------------------------------------
+port publish : JE.Value -> Cmd msg
+
+
+-- HELPERS ---------------------------------------------------------------------
+
+(=>) = (,)
 
 
 -- ALIASES ---------------------------------------------------------------------
@@ -87,16 +94,14 @@ init _
   = { mode  = Naught
     , tasks = []
     }
-  ! [ Http.get "http://localhost:4000/api/mode" decodeMode
-        |> Http.send ModeFetch
-    ]
+  ! []
 
 -- MSG -------------------------------------------------------------------------
 
 type Msg = NoOp
-         | Skip              
          | Undo             
-         | ModeFetch (Result Http.Error Mode)
+         | ModeSkip
+         | ModeUpdate Mode
          | Push Notification -- TODO: push notification
 
 
@@ -106,9 +111,19 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model
   = case msg of
 
-      ModeFetch (Ok mode) ->
+      ModeUpdate mode ->
 
         { model | mode = mode } ! []
+
+      ModeSkip ->
+
+        model
+        ! [ publish
+            <| JE.object
+              [ "topic" => JE.string "mode:skip"
+              , "body"  => JE.null
+              ]
+          ]
 
       _ ->
 
@@ -118,7 +133,10 @@ update msg model
 -- SUBS ------------------------------------------------------------------------
 
 subs : Model -> Sub Msg
-subs model = Sub.none
+subs model
+  = Sub.batch
+    [ mode (decodeMode >> Result.withDefault model.mode >> ModeUpdate)
+    ]
 
 
 -- VIEW ------------------------------------------------------------------------
@@ -334,16 +352,19 @@ view {mode,tasks}
          ]
        , aside []
          [ stats
-         , button [ onClick Skip ] [ text "skip" ]
-         , button [ onClick Undo ] [ text "undo" ]
+         , button [ onClick ModeSkip ] [ text "skip" ]
+         -- , button [ onClick Undo ] [ text "undo" ]
          ]
        ]
           
 
 -- JSON ------------------------------------------------------------------------
 
-decodeMode : Decoder Mode
-decodeMode
+decodeMode : JD.Value -> Result String Mode
+decodeMode = JD.decodeValue modeDecoder
+
+modeDecoder : Decoder Mode
+modeDecoder
   = JD.field "mode" JD.string
   |> JD.andThen
   ( \mode ->

@@ -18,9 +18,24 @@ import "phoenix_html";
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-// import socket from "./socket"
-
 import Elm from "./penny";
+import channel from "./socket";
+
+channel.push('mode:get');
 
 const elmNode = document.querySelector('#elm');
-const app = elmNode && Elm.Penny.embed( elmNode, "" );
+if( elmNode )
+{
+    const app = Elm.Penny.embed( elmNode, "" );
+
+    channel.on( "mode", mode => {
+	console.log( mode );
+	app.ports.mode.send( mode );
+    });
+
+    app.ports.publish.subscribe( ({topic,body}) => {
+	console.log( topic, body );
+	channel.push( topic, body );
+    });
+}
+
