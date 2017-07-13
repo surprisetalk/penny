@@ -7,6 +7,7 @@ TODO: everything should be insert-only events
 -}
 
 -- TODO: work in 30-minute units
+-- TODO:   if it can't fit in a unit, then it needs to be a unit-group
 -- TODO:   must "check in" units?
 -- TODO:      units should have proof or analysis?
 -- TODO:         easy as checkboxes, hard as blog entries
@@ -61,24 +62,24 @@ type alias Model
     }
 
 type Mode
-  = Frolic     -- Prepare
-  | Naught     
-  | Tidy
-  | Exercise   
-  | Fuel
-  | Groom
-  | Inspire
-  | Strategize 
-  | Create     -- Queue
-  | Learn
-  | Work
-  | Connect
-  | Consume
-  | Review     -- Meta
-  | Automate
-  | Journal
-  | Read       -- Sleep
-  | Sleep
+  = Frolic     --    -- Prepare
+  | Naught     --    
+  | Tidy       --   
+  | Exercise   --  2
+  | Fuel       --  
+  | Groom      --
+  | Inspire    --
+  | Strategize --   
+  | Create     --  8 -- Queue
+  | Learn      --  2
+  | Work       --  8
+  | Connect    --  1
+  | Consume    --  1
+  | Review     --    -- Meta
+  | Automate   --
+  | Journal    --
+  | Read       --    -- Sleep
+  | Sleep      -- 15
 
 type Task
   = Task_
@@ -437,6 +438,9 @@ view {mode,tasks}
               -- TODO: chores
               -- TODO: sort by urgent/important matrix then oldest
               -- TODO:   "is this actionable?" -> "break it down"
+
+              -- TODO: how many chores per day?
+              -- TODO:   urgent ++ (take (max 0 (4 - length urgent)) <| filter (not isUrgent))
 
               div []
               [ text "do your chores!"
