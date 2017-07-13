@@ -1,5 +1,6 @@
 defmodule Penny.RoomChannel do
   use Penny.Web, :channel
+  @schema_meta_fields [:__meta__]
 
   alias Penny.Task
   alias Penny.Mode.Event
@@ -13,20 +14,13 @@ defmodule Penny.RoomChannel do
   end
 
   def handle_in("tasks:get", _params, socket) do
-    # case Repo.all(Task) do
-    #   nil ->
-    #     push socket, "tasks", %{"tasks" => []}
-    #     {:reply, {:ok, %{"tasks" => []}}, socket}
-    #   {nil, _} ->
-    #     push socket, "tasks", %{"tasks" => []}
-    #     {:reply, {:ok, %{"tasks" => []}}, socket}
-    #   tasks ->
-    #     push socket, "tasks", %{"tasks" => tasks |> Enum.map(fn(%Task{name: name}) -> %{"name" => name} end) }
-    #     {:reply, {:ok, %{"tasks" => tasks}}, socket}
-    # end
-    # tasks = Task |> Repo.all |> Enum.map(fn(task) -> Map.from_struct(task) end)
-    # push socket, "mode", %{"tasks" => tasks}
-    # {:ok, socket}
+    tasks = Task
+          |> Repo.all
+          |> Enum.map(&unstruct/1)
+
+    push socket, "tasks", %{"tasks" => tasks}
+
+    {:reply, {:ok, %{"tasks" => tasks}}, socket}
   end
 
   def handle_in("mode:get", _params, socket) do
@@ -97,5 +91,12 @@ defmodule Penny.RoomChannel do
   defp next(enum, current) do
     index_ = 1 + Enum.find_index(enum, fn(val) -> val == current end) 
     Enum.fetch!(enum, rem(index_, Enum.count enum))
+  end
+
+  defp unstruct(struct) do
+    association_fields = struct.__struct__.__schema__(:associations)
+    waste_fields = association_fields ++ @schema_meta_fields
+
+    struct |> Map.from_struct |> Map.drop(waste_fields)
   end
 end

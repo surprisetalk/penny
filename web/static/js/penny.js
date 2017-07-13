@@ -11951,6 +11951,356 @@ var _elm_lang$html$Html$summary = _elm_lang$html$Html$node('summary');
 var _elm_lang$html$Html$menuitem = _elm_lang$html$Html$node('menuitem');
 var _elm_lang$html$Html$menu = _elm_lang$html$Html$node('menu');
 
+var _elm_lang$html$Html_Attributes$map = _elm_lang$virtual_dom$VirtualDom$mapProperty;
+var _elm_lang$html$Html_Attributes$attribute = _elm_lang$virtual_dom$VirtualDom$attribute;
+var _elm_lang$html$Html_Attributes$contextmenu = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'contextmenu', value);
+};
+var _elm_lang$html$Html_Attributes$draggable = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'draggable', value);
+};
+var _elm_lang$html$Html_Attributes$itemprop = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'itemprop', value);
+};
+var _elm_lang$html$Html_Attributes$tabindex = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'tabIndex',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$charset = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'charset', value);
+};
+var _elm_lang$html$Html_Attributes$height = function (value) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'height',
+		_elm_lang$core$Basics$toString(value));
+};
+var _elm_lang$html$Html_Attributes$width = function (value) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'width',
+		_elm_lang$core$Basics$toString(value));
+};
+var _elm_lang$html$Html_Attributes$formaction = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'formAction', value);
+};
+var _elm_lang$html$Html_Attributes$list = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'list', value);
+};
+var _elm_lang$html$Html_Attributes$minlength = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'minLength',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$maxlength = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'maxlength',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$size = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'size',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$form = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'form', value);
+};
+var _elm_lang$html$Html_Attributes$cols = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'cols',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$rows = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'rows',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$challenge = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'challenge', value);
+};
+var _elm_lang$html$Html_Attributes$media = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'media', value);
+};
+var _elm_lang$html$Html_Attributes$rel = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'rel', value);
+};
+var _elm_lang$html$Html_Attributes$datetime = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'datetime', value);
+};
+var _elm_lang$html$Html_Attributes$pubdate = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'pubdate', value);
+};
+var _elm_lang$html$Html_Attributes$colspan = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'colspan',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$rowspan = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'rowspan',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$manifest = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'manifest', value);
+};
+var _elm_lang$html$Html_Attributes$property = _elm_lang$virtual_dom$VirtualDom$property;
+var _elm_lang$html$Html_Attributes$stringProperty = F2(
+	function (name, string) {
+		return A2(
+			_elm_lang$html$Html_Attributes$property,
+			name,
+			_elm_lang$core$Json_Encode$string(string));
+	});
+var _elm_lang$html$Html_Attributes$class = function (name) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'className', name);
+};
+var _elm_lang$html$Html_Attributes$id = function (name) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'id', name);
+};
+var _elm_lang$html$Html_Attributes$title = function (name) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'title', name);
+};
+var _elm_lang$html$Html_Attributes$accesskey = function ($char) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'accessKey',
+		_elm_lang$core$String$fromChar($char));
+};
+var _elm_lang$html$Html_Attributes$dir = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'dir', value);
+};
+var _elm_lang$html$Html_Attributes$dropzone = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'dropzone', value);
+};
+var _elm_lang$html$Html_Attributes$lang = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'lang', value);
+};
+var _elm_lang$html$Html_Attributes$content = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'content', value);
+};
+var _elm_lang$html$Html_Attributes$httpEquiv = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'httpEquiv', value);
+};
+var _elm_lang$html$Html_Attributes$language = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'language', value);
+};
+var _elm_lang$html$Html_Attributes$src = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'src', value);
+};
+var _elm_lang$html$Html_Attributes$alt = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'alt', value);
+};
+var _elm_lang$html$Html_Attributes$preload = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'preload', value);
+};
+var _elm_lang$html$Html_Attributes$poster = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'poster', value);
+};
+var _elm_lang$html$Html_Attributes$kind = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'kind', value);
+};
+var _elm_lang$html$Html_Attributes$srclang = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'srclang', value);
+};
+var _elm_lang$html$Html_Attributes$sandbox = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'sandbox', value);
+};
+var _elm_lang$html$Html_Attributes$srcdoc = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'srcdoc', value);
+};
+var _elm_lang$html$Html_Attributes$type_ = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'type', value);
+};
+var _elm_lang$html$Html_Attributes$value = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'value', value);
+};
+var _elm_lang$html$Html_Attributes$defaultValue = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'defaultValue', value);
+};
+var _elm_lang$html$Html_Attributes$placeholder = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'placeholder', value);
+};
+var _elm_lang$html$Html_Attributes$accept = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'accept', value);
+};
+var _elm_lang$html$Html_Attributes$acceptCharset = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'acceptCharset', value);
+};
+var _elm_lang$html$Html_Attributes$action = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'action', value);
+};
+var _elm_lang$html$Html_Attributes$autocomplete = function (bool) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'autocomplete',
+		bool ? 'on' : 'off');
+};
+var _elm_lang$html$Html_Attributes$enctype = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'enctype', value);
+};
+var _elm_lang$html$Html_Attributes$method = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'method', value);
+};
+var _elm_lang$html$Html_Attributes$name = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'name', value);
+};
+var _elm_lang$html$Html_Attributes$pattern = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'pattern', value);
+};
+var _elm_lang$html$Html_Attributes$for = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'htmlFor', value);
+};
+var _elm_lang$html$Html_Attributes$max = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'max', value);
+};
+var _elm_lang$html$Html_Attributes$min = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'min', value);
+};
+var _elm_lang$html$Html_Attributes$step = function (n) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'step', n);
+};
+var _elm_lang$html$Html_Attributes$wrap = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'wrap', value);
+};
+var _elm_lang$html$Html_Attributes$usemap = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'useMap', value);
+};
+var _elm_lang$html$Html_Attributes$shape = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'shape', value);
+};
+var _elm_lang$html$Html_Attributes$coords = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'coords', value);
+};
+var _elm_lang$html$Html_Attributes$keytype = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'keytype', value);
+};
+var _elm_lang$html$Html_Attributes$align = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'align', value);
+};
+var _elm_lang$html$Html_Attributes$cite = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'cite', value);
+};
+var _elm_lang$html$Html_Attributes$href = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'href', value);
+};
+var _elm_lang$html$Html_Attributes$target = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'target', value);
+};
+var _elm_lang$html$Html_Attributes$downloadAs = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'download', value);
+};
+var _elm_lang$html$Html_Attributes$hreflang = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'hreflang', value);
+};
+var _elm_lang$html$Html_Attributes$ping = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'ping', value);
+};
+var _elm_lang$html$Html_Attributes$start = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'start',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$headers = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'headers', value);
+};
+var _elm_lang$html$Html_Attributes$scope = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'scope', value);
+};
+var _elm_lang$html$Html_Attributes$boolProperty = F2(
+	function (name, bool) {
+		return A2(
+			_elm_lang$html$Html_Attributes$property,
+			name,
+			_elm_lang$core$Json_Encode$bool(bool));
+	});
+var _elm_lang$html$Html_Attributes$hidden = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'hidden', bool);
+};
+var _elm_lang$html$Html_Attributes$contenteditable = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'contentEditable', bool);
+};
+var _elm_lang$html$Html_Attributes$spellcheck = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'spellcheck', bool);
+};
+var _elm_lang$html$Html_Attributes$async = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'async', bool);
+};
+var _elm_lang$html$Html_Attributes$defer = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'defer', bool);
+};
+var _elm_lang$html$Html_Attributes$scoped = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'scoped', bool);
+};
+var _elm_lang$html$Html_Attributes$autoplay = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'autoplay', bool);
+};
+var _elm_lang$html$Html_Attributes$controls = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'controls', bool);
+};
+var _elm_lang$html$Html_Attributes$loop = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'loop', bool);
+};
+var _elm_lang$html$Html_Attributes$default = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'default', bool);
+};
+var _elm_lang$html$Html_Attributes$seamless = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'seamless', bool);
+};
+var _elm_lang$html$Html_Attributes$checked = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'checked', bool);
+};
+var _elm_lang$html$Html_Attributes$selected = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'selected', bool);
+};
+var _elm_lang$html$Html_Attributes$autofocus = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'autofocus', bool);
+};
+var _elm_lang$html$Html_Attributes$disabled = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'disabled', bool);
+};
+var _elm_lang$html$Html_Attributes$multiple = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'multiple', bool);
+};
+var _elm_lang$html$Html_Attributes$novalidate = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'noValidate', bool);
+};
+var _elm_lang$html$Html_Attributes$readonly = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'readOnly', bool);
+};
+var _elm_lang$html$Html_Attributes$required = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'required', bool);
+};
+var _elm_lang$html$Html_Attributes$ismap = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'isMap', value);
+};
+var _elm_lang$html$Html_Attributes$download = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'download', bool);
+};
+var _elm_lang$html$Html_Attributes$reversed = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'reversed', bool);
+};
+var _elm_lang$html$Html_Attributes$classList = function (list) {
+	return _elm_lang$html$Html_Attributes$class(
+		A2(
+			_elm_lang$core$String$join,
+			' ',
+			A2(
+				_elm_lang$core$List$map,
+				_elm_lang$core$Tuple$first,
+				A2(_elm_lang$core$List$filter, _elm_lang$core$Tuple$second, list))));
+};
+var _elm_lang$html$Html_Attributes$style = _elm_lang$virtual_dom$VirtualDom$style;
+
 var _elm_lang$html$Html_Events$keyCode = A2(_elm_lang$core$Json_Decode$field, 'keyCode', _elm_lang$core$Json_Decode$int);
 var _elm_lang$html$Html_Events$targetChecked = A2(
 	_elm_lang$core$Json_Decode$at,
@@ -12066,56 +12416,127 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
+var _user$project$Penny$viewImportantTask = function (_p0) {
+	var _p1 = _p0;
+	return _elm_lang$html$Html$text('TODO');
+};
+var _user$project$Penny$untask = function (_p2) {
+	var _p3 = _p2;
+	return _p3._0;
+};
+var _user$project$Penny_ops = _user$project$Penny_ops || {};
+_user$project$Penny_ops[':='] = _elm_lang$core$Json_Decode$field;
 var _user$project$Penny_ops = _user$project$Penny_ops || {};
 _user$project$Penny_ops['=>'] = F2(
 	function (v0, v1) {
 		return {ctor: '_Tuple2', _0: v0, _1: v1};
 	});
+var _user$project$Penny$viewTask = function (_p4) {
+	var _p5 = _p4;
+	return A2(
+		_elm_lang$html$Html$li,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A3(
+				_elm_lang$core$Basics$flip,
+				_elm_lang$html$Html$input,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$type_('checkbox'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$checked(_p5._0.done),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$label,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(_p5._0.name),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$ul,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$style(
+								{
+									ctor: '::',
+									_0: A2(_user$project$Penny_ops['=>'], 'margin-top', '0px'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						},
+						A2(
+							_elm_lang$core$List$map,
+							function (s) {
+								return A2(
+									_elm_lang$html$Html$li,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(s),
+										_1: {ctor: '[]'}
+									});
+							},
+							A2(_elm_lang$core$String$split, '\n', _p5._0.body))),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$Penny$viewTasks = function (tasks) {
+	var newTask = {
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$li,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$input,
+					{ctor: '[]'},
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	};
+	var mostImportantTask = A2(
+		_elm_lang$core$List$map,
+		_user$project$Penny$viewImportantTask,
+		A2(_elm_lang$core$List$take, 1, tasks));
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			mostImportantTask,
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$ul,
+					{ctor: '[]'},
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						A2(_elm_lang$core$List$map, _user$project$Penny$viewTask, tasks),
+						newTask)),
+				_1: {ctor: '[]'}
+			}));
+};
 var _user$project$Penny$mode = _elm_lang$core$Native_Platform.incomingPort('mode', _elm_lang$core$Json_Decode$value);
+var _user$project$Penny$tasks = _elm_lang$core$Native_Platform.incomingPort('tasks', _elm_lang$core$Json_Decode$value);
 var _user$project$Penny$publish = _elm_lang$core$Native_Platform.outgoingPort(
 	'publish',
 	function (v) {
 		return v;
-	});
-var _user$project$Penny$update = F2(
-	function (msg, model) {
-		var _p0 = msg;
-		switch (_p0.ctor) {
-			case 'ModeUpdate':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_elm_lang$core$Native_Utils.update(
-						model,
-						{mode: _p0._0}),
-					{ctor: '[]'});
-			case 'ModeSkip':
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					model,
-					{
-						ctor: '::',
-						_0: _user$project$Penny$publish(
-							_elm_lang$core$Json_Encode$object(
-								{
-									ctor: '::',
-									_0: A2(
-										_user$project$Penny_ops['=>'],
-										'topic',
-										_elm_lang$core$Json_Encode$string('mode:skip')),
-									_1: {
-										ctor: '::',
-										_0: A2(_user$project$Penny_ops['=>'], 'body', _elm_lang$core$Json_Encode$null),
-										_1: {ctor: '[]'}
-									}
-								})),
-						_1: {ctor: '[]'}
-					});
-			default:
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					model,
-					{ctor: '[]'});
-		}
 	});
 var _user$project$Penny$Model = F2(
 	function (a, b) {
@@ -12139,7 +12560,7 @@ var _user$project$Penny$Fuel = {ctor: 'Fuel'};
 var _user$project$Penny$Exercise = {ctor: 'Exercise'};
 var _user$project$Penny$Tidy = {ctor: 'Tidy'};
 var _user$project$Penny$Naught = {ctor: 'Naught'};
-var _user$project$Penny$init = function (_p1) {
+var _user$project$Penny$init = function (_p6) {
 	return A2(
 		_elm_lang$core$Platform_Cmd_ops['!'],
 		{
@@ -12152,8 +12573,8 @@ var _user$project$Penny$Frolic = {ctor: 'Frolic'};
 var _user$project$Penny$modeDecoder = A2(
 	_elm_lang$core$Json_Decode$andThen,
 	function (mode) {
-		var _p2 = _elm_lang$core$String$toLower(mode);
-		switch (_p2) {
+		var _p7 = _elm_lang$core$String$toLower(mode);
+		switch (_p7) {
 			case 'frolic':
 				return _elm_lang$core$Json_Decode$succeed(_user$project$Penny$Frolic);
 			case 'naught':
@@ -12200,14 +12621,183 @@ var _user$project$Penny$decodeMode = _elm_lang$core$Json_Decode$decodeValue(_use
 var _user$project$Penny$Task_ = function (a) {
 	return {ctor: 'Task_', _0: a};
 };
+var _user$project$Penny$update = F2(
+	function (msg, _p8) {
+		var _p9 = _p8;
+		var _p17 = _p9;
+		var _p10 = msg;
+		switch (_p10.ctor) {
+			case 'TasksUpdate':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						_p17,
+						{
+							tasks: _elm_lang$core$Dict$values(
+								A2(
+									_elm_lang$core$Dict$union,
+									_elm_lang$core$Dict$fromList(
+										A2(
+											_elm_lang$core$List$map,
+											function (_p11) {
+												var _p12 = _p11;
+												var _p13 = _p12._0;
+												return {
+													ctor: '_Tuple2',
+													_0: _p13.id,
+													_1: _user$project$Penny$Task_(_p13)
+												};
+											},
+											_p10._0)),
+									_elm_lang$core$Dict$fromList(
+										A2(
+											_elm_lang$core$List$map,
+											function (_p14) {
+												var _p15 = _p14;
+												var _p16 = _p15._0;
+												return {
+													ctor: '_Tuple2',
+													_0: _p16.id,
+													_1: _user$project$Penny$Task_(_p16)
+												};
+											},
+											_p9.tasks))))
+						}),
+					{ctor: '[]'});
+			case 'ModeUpdate':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						_p17,
+						{mode: _p10._0}),
+					{ctor: '[]'});
+			case 'ModeSkip':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_p17,
+					{
+						ctor: '::',
+						_0: _user$project$Penny$publish(
+							_elm_lang$core$Json_Encode$object(
+								{
+									ctor: '::',
+									_0: A2(
+										_user$project$Penny_ops['=>'],
+										'topic',
+										_elm_lang$core$Json_Encode$string('mode:skip')),
+									_1: {
+										ctor: '::',
+										_0: A2(_user$project$Penny_ops['=>'], 'body', _elm_lang$core$Json_Encode$null),
+										_1: {ctor: '[]'}
+									}
+								})),
+						_1: {ctor: '[]'}
+					});
+			default:
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_p17,
+					{ctor: '[]'});
+		}
+	});
 var _user$project$Penny$Chore = F2(
 	function (a, b) {
 		return {ctor: 'Chore', _0: a, _1: b};
 	});
+var _user$project$Penny$isChore = function (_p18) {
+	var _p19 = _p18;
+	var _p20 = _p19._0.kind;
+	return _elm_lang$core$Native_Utils.eq(
+		_p20,
+		A2(_user$project$Penny$Chore, true, false)) || (_elm_lang$core$Native_Utils.eq(
+		_p20,
+		A2(_user$project$Penny$Chore, false, true)) || (_elm_lang$core$Native_Utils.eq(
+		_p20,
+		A2(_user$project$Penny$Chore, true, true)) || _elm_lang$core$Native_Utils.eq(
+		_p20,
+		A2(_user$project$Penny$Chore, false, false))));
+};
 var _user$project$Penny$Project = {ctor: 'Project'};
+var _user$project$Penny$isProject = function (_p21) {
+	return A2(
+		F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.eq(x, y);
+			}),
+		_user$project$Penny$Project,
+		function (_) {
+			return _.kind;
+		}(
+			_user$project$Penny$untask(_p21)));
+};
 var _user$project$Penny$Study = {ctor: 'Study'};
+var _user$project$Penny$isStudy = function (_p22) {
+	return A2(
+		F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.eq(x, y);
+			}),
+		_user$project$Penny$Study,
+		function (_) {
+			return _.kind;
+		}(
+			_user$project$Penny$untask(_p22)));
+};
+var _user$project$Penny$taskKindDecoder = function (kind) {
+	var _p23 = _elm_lang$core$String$toLower(kind);
+	switch (_p23) {
+		case 'project':
+			return _elm_lang$core$Json_Decode$succeed(_user$project$Penny$Project);
+		case 'study':
+			return _elm_lang$core$Json_Decode$succeed(_user$project$Penny$Study);
+		case 'chore':
+			return A3(
+				_elm_lang$core$Json_Decode$map2,
+				_user$project$Penny$Chore,
+				A2(_user$project$Penny_ops[':='], 'urgent', _elm_lang$core$Json_Decode$bool),
+				A2(_user$project$Penny_ops[':='], 'important', _elm_lang$core$Json_Decode$bool));
+		default:
+			return _elm_lang$core$Json_Decode$fail(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'could not decode kind: \'',
+					A2(_elm_lang$core$Basics_ops['++'], kind, '\'')));
+	}
+};
+var _user$project$Penny$tasksDecoder = A2(
+	_elm_lang$core$Json_Decode$field,
+	'tasks',
+	_elm_lang$core$Json_Decode$list(
+		A2(
+			_elm_lang$core$Json_Decode$map,
+			_user$project$Penny$Task_,
+			A6(
+				_elm_lang$core$Json_Decode$map5,
+				F5(
+					function (id, done, name, body, kind) {
+						return {
+							id: id,
+							done: done,
+							name: name,
+							body: body,
+							kind: kind,
+							tasks: {ctor: '[]'}
+						};
+					}),
+				A2(_user$project$Penny_ops[':='], 'id', _elm_lang$core$Json_Decode$int),
+				_elm_lang$core$Json_Decode$succeed(false),
+				A2(_user$project$Penny_ops[':='], 'name', _elm_lang$core$Json_Decode$string),
+				A2(_user$project$Penny_ops[':='], 'body', _elm_lang$core$Json_Decode$string),
+				A2(
+					_elm_lang$core$Json_Decode$andThen,
+					_user$project$Penny$taskKindDecoder,
+					A2(_elm_lang$core$Json_Decode$field, 'kind', _elm_lang$core$Json_Decode$string))))));
+var _user$project$Penny$decodeTasks = _elm_lang$core$Json_Decode$decodeValue(_user$project$Penny$tasksDecoder);
 var _user$project$Penny$Push = function (a) {
 	return {ctor: 'Push', _0: a};
+};
+var _user$project$Penny$TasksUpdate = function (a) {
+	return {ctor: 'TasksUpdate', _0: a};
 };
 var _user$project$Penny$ModeUpdate = function (a) {
 	return {ctor: 'ModeUpdate', _0: a};
@@ -12217,26 +12807,45 @@ var _user$project$Penny$subs = function (model) {
 		{
 			ctor: '::',
 			_0: _user$project$Penny$mode(
-				function (_p3) {
+				function (_p24) {
 					return _user$project$Penny$ModeUpdate(
 						A2(
 							_elm_lang$core$Result$withDefault,
 							model.mode,
-							_user$project$Penny$decodeMode(_p3)));
+							A2(
+								_elm_lang$core$Result$mapError,
+								_elm_lang$core$Debug$log('mode decode'),
+								_user$project$Penny$decodeMode(_p24))));
 				}),
-			_1: {ctor: '[]'}
+			_1: {
+				ctor: '::',
+				_0: _user$project$Penny$tasks(
+					function (_p25) {
+						return _user$project$Penny$TasksUpdate(
+							A2(
+								_elm_lang$core$Result$withDefault,
+								model.tasks,
+								A2(
+									_elm_lang$core$Result$mapError,
+									_elm_lang$core$Debug$log('tasks decode'),
+									_user$project$Penny$decodeTasks(_p25))));
+					}),
+				_1: {ctor: '[]'}
+			}
 		});
 };
 var _user$project$Penny$ModeSkip = {ctor: 'ModeSkip'};
-var _user$project$Penny$view = function (_p4) {
-	var _p5 = _p4;
+var _user$project$Penny$view = function (_p26) {
+	var _p27 = _p26;
+	var _p30 = _p27.tasks;
+	var _p29 = _p27.mode;
 	var stats = A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
 		{ctor: '[]'});
 	var now = function () {
-		var _p6 = _p5.mode;
-		switch (_p6.ctor) {
+		var _p28 = _p29;
+		switch (_p28.ctor) {
 			case 'Frolic':
 				return _elm_lang$html$Html$text('thank you universe!');
 			case 'Naught':
@@ -12326,11 +12935,47 @@ var _user$project$Penny$view = function (_p4) {
 			case 'Strategize':
 				return _elm_lang$html$Html$text('look over your list');
 			case 'Create':
-				return _elm_lang$html$Html$text('make something amazing! and make it quick & messy');
+				return A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('make something amazing! and make it quick & messy'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Penny$viewTasks(
+								A2(_elm_lang$core$List$filter, _user$project$Penny$isProject, _p30)),
+							_1: {ctor: '[]'}
+						}
+					});
 			case 'Learn':
-				return _elm_lang$html$Html$text('learn something');
+				return A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('learn something!'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Penny$viewTasks(
+								A2(_elm_lang$core$List$filter, _user$project$Penny$isStudy, _p30)),
+							_1: {ctor: '[]'}
+						}
+					});
 			case 'Work':
-				return _elm_lang$html$Html$text('do your chores');
+				return A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('do your chores!'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Penny$viewTasks(
+								A2(_elm_lang$core$List$filter, _user$project$Penny$isChore, _p30)),
+							_1: {ctor: '[]'}
+						}
+					});
 			case 'Connect':
 				return _elm_lang$html$Html$text('remind somebody how much they mean to you!');
 			case 'Consume':
@@ -12378,39 +13023,68 @@ var _user$project$Penny$view = function (_p4) {
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$div,
+				_elm_lang$html$Html$h1,
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: now,
-					_1: {ctor: '[]'}
+					_0: _elm_lang$html$Html$text(
+						_elm_lang$core$String$toUpper(
+							_elm_lang$core$Basics$toString(_p29))),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$span,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$style(
+									{
+										ctor: '::',
+										_0: A2(_user$project$Penny_ops['=>'], 'font-size', '14pt'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Events$onClick(_user$project$Penny$ModeSkip),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('skip'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
 				}),
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$aside,
+					_elm_lang$html$Html$div,
 					{ctor: '[]'},
 					{
 						ctor: '::',
-						_0: stats,
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$button,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(_user$project$Penny$ModeSkip),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('skip'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}
+						_0: now,
+						_1: {ctor: '[]'}
 					}),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$aside,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: stats,
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
 			}
 		});
 };
@@ -12422,7 +13096,7 @@ var _user$project$Penny$NoOp = {ctor: 'NoOp'};
 var Elm = {};
 Elm['Penny'] = Elm['Penny'] || {};
 if (typeof _user$project$Penny$main !== 'undefined') {
-    _user$project$Penny$main(Elm['Penny'], 'Penny', {"types":{"unions":{"Penny.Msg":{"args":[],"tags":{"ModeSkip":[],"ModeUpdate":["Penny.Mode"],"Undo":[],"Push":["Penny.Notification"],"NoOp":[]}},"Penny.Mode":{"args":[],"tags":{"Learn":[],"Sleep":[],"Read":[],"Inspire":[],"Frolic":[],"Groom":[],"Tidy":[],"Connect":[],"Journal":[],"Consume":[],"Strategize":[],"Create":[],"Review":[],"Automate":[],"Fuel":[],"Exercise":[],"Work":[],"Naught":[]}}},"aliases":{"Penny.Notification":{"args":[],"type":"{}"}},"message":"Penny.Msg"},"versions":{"elm":"0.18.0"}});
+    _user$project$Penny$main(Elm['Penny'], 'Penny', {"types":{"unions":{"Penny.Kind":{"args":[],"tags":{"Project":[],"Study":[],"Chore":["Bool","Bool"]}},"Penny.Msg":{"args":[],"tags":{"TasksUpdate":["List Penny.Task"],"ModeSkip":[],"ModeUpdate":["Penny.Mode"],"Undo":[],"Push":["Penny.Notification"],"NoOp":[]}},"Penny.Mode":{"args":[],"tags":{"Learn":[],"Sleep":[],"Read":[],"Inspire":[],"Frolic":[],"Groom":[],"Tidy":[],"Connect":[],"Journal":[],"Consume":[],"Strategize":[],"Create":[],"Review":[],"Automate":[],"Fuel":[],"Exercise":[],"Work":[],"Naught":[]}},"Penny.Task":{"args":[],"tags":{"Task_":["{ id : Int , done : Bool , name : String , body : String , kind : Penny.Kind , tasks : List Penny.Task }"]}}},"aliases":{"Penny.Notification":{"args":[],"type":"{}"}},"message":"Penny.Msg"},"versions":{"elm":"0.18.0"}});
 }
 
 if (typeof define === "function" && define['amd'])

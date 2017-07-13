@@ -24,7 +24,6 @@ import channel from "./socket";
 channel.push('mode:get');
 channel.push('tasks:get');
 
-
 const elmNode = document.querySelector('#elm');
 if( elmNode )
 {
@@ -33,6 +32,11 @@ if( elmNode )
     channel.on( "mode", mode => {
 	console.log( mode );
 	app.ports.mode.send( mode );
+    });
+
+    channel.on( "tasks", tasks => {
+	console.log( tasks );
+	app.ports.tasks.send( tasks );
     });
 
     app.ports.publish.subscribe( ({topic,body}) => {

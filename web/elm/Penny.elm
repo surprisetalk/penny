@@ -10,6 +10,7 @@ TODO: everything should be insert-only events
 
 import Html exposing (..)
 import Html.Events exposing (..)
+import Html.Attributes exposing (..)
 
 -- import Date exposing ( Date )
 
@@ -18,6 +19,8 @@ import Html.Events exposing (..)
 import Json.Decode as JD exposing ( Decoder )
 import Json.Encode as JE
 
+import Dict exposing ( Dict )
+
 import String exposing ( toLower )
 
 
@@ -25,12 +28,16 @@ import String exposing ( toLower )
 
 port mode : (JD.Value -> msg) -> Sub msg
 
+port tasks : (JD.Value -> msg) -> Sub msg
+
 port publish : JE.Value -> Cmd msg
 
 
 -- HELPERS ---------------------------------------------------------------------
 
 (=>) = (,)
+
+(:=) = JD.field
 
 
 -- ALIASES ---------------------------------------------------------------------
@@ -70,11 +77,12 @@ type Mode
 
 type Task
   = Task_
-    { done      : Bool
-    , name      : String
-    , body      : String
-    , kind      : Kind
-    , tasks     : List Task
+    { id    : Int
+    , done  : Bool
+    , name  : String
+    , body  : String
+    , kind  : Kind
+    , tasks : List Task
     }
 
 type Kind
@@ -82,6 +90,18 @@ type Kind
   | Project
   | Chore Bool   Bool
     --    urgent important
+
+untask (Task_ t) = t
+
+isStudy = untask >> .kind >> (==) Study
+
+isProject = untask >> .kind >> (==) Project
+
+isChore (Task_ {kind})
+  = kind == Chore True  False
+ || kind == Chore False True
+ || kind == Chore True  True
+ || kind == Chore False False
 
 type alias Notification
   = {} -- TODO
@@ -102,14 +122,26 @@ type Msg = NoOp
          | Undo             
          | ModeSkip
          | ModeUpdate Mode
+         | TasksUpdate (List Task)
          | Push Notification -- TODO: push notification
 
 
 -- UPDATE ----------------------------------------------------------------------
 
 update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model
+update msg ({mode,tasks} as model)
   = case msg of
+
+      TasksUpdate tasks_ ->
+
+        { model
+          | tasks
+            = Dict.values
+            <| Dict.union
+              (tasks_ |> List.map (\(Task_ task) -> (task.id, Task_ task)) |> Dict.fromList)
+              (tasks  |> List.map (\(Task_ task) -> (task.id, Task_ task)) |> Dict.fromList)
+        }
+      ! []
 
       ModeUpdate mode ->
 
@@ -135,13 +167,56 @@ update msg model
 subs : Model -> Sub Msg
 subs model
   = Sub.batch
-    [ mode (decodeMode >> Result.withDefault model.mode >> ModeUpdate)
+    [ mode  (decodeMode  >> Result.mapError (Debug.log  "mode decode") >> Result.withDefault model.mode  >>  ModeUpdate)
+    , tasks (decodeTasks >> Result.mapError (Debug.log "tasks decode") >> Result.withDefault model.tasks >> TasksUpdate)
     ]
 
 
 -- VIEW ------------------------------------------------------------------------
 
 -- TODO: use timers to show long we've been doing a thing
+
+viewTask : Task -> Html Msg
+viewTask (Task_ {id,done,name,body})
+  = li []
+    [ flip input []
+      [ type_ "checkbox"
+      , checked done
+      ]
+    , label []
+      [ text name
+      ]
+    , ul [ style [ "margin-top" => "0px" ] ]
+      <| List.map (\s -> li [] [ text s ])
+      <| String.split "\n"
+      <| body
+    ]
+
+viewImportantTask : Task -> Html Msg
+viewImportantTask (Task_ {id,done,name,body})
+  = text "TODO"
+
+viewTasks : List Task -> Html Msg
+viewTasks tasks
+  = let mostImportantTask
+          = tasks
+          |> List.take 1
+          |> List.map viewImportantTask
+
+        newTask
+          = [ li []
+              [ input []
+                [
+                ]
+              ]
+            ]
+
+    in div []
+     <| mostImportantTask
+    ++ [ ul []
+         <| List.map viewTask tasks
+        ++ newTask
+       ]
 
 view : Model -> Html Msg
 view {mode,tasks}
@@ -229,7 +304,12 @@ view {mode,tasks}
               -- TODO: make create tasks!
               -- TODO:   "is this actionable?" -> "break it down"
 
-              text "make something amazing! and make it quick & messy"
+              div []
+              [ text "make something amazing! and make it quick & messy"
+              , viewTasks
+                <| List.filter isProject
+                <| tasks
+              ] 
               
 
             Learn ->
@@ -272,8 +352,12 @@ view {mode,tasks}
               -- TODO:   electrical
               -- TODO:     circuit problems
 
-              text "learn something"
-              
+              div []
+              [ text "learn something!"
+              , viewTasks
+                <| List.filter isStudy
+                <| tasks
+              ] 
 
             Work ->
 
@@ -281,7 +365,12 @@ view {mode,tasks}
               -- TODO: sort by urgent/important matrix then oldest
               -- TODO:   "is this actionable?" -> "break it down"
 
-              text "do your chores"
+              div []
+              [ text "do your chores!"
+              , viewTasks
+                <| List.filter isChore
+                <| tasks
+              ] 
               
 
             Connect ->
@@ -347,12 +436,17 @@ view {mode,tasks}
             -- TODO
 
     in main_ []
-       [ div []
+       [ h1 []
+         [ mode |> toString |> String.toUpper |> text
+         , span [ style [ "font-size" => "14pt" ] ]
+           [ button [ onClick ModeSkip ] [ text "skip" ]
+           ]
+         ]
+       , div []
          [ now
          ]
        , aside []
          [ stats
-         , button [ onClick ModeSkip ] [ text "skip" ]
          -- , button [ onClick Undo ] [ text "undo" ]
          ]
        ]
@@ -390,6 +484,32 @@ modeDecoder
         _            -> JD.fail <| mode ++ " is not a valid mode"
   )   
 
+decodeTasks = JD.decodeValue tasksDecoder
+
+tasksDecoder : Decoder (List Task)
+tasksDecoder
+  = JD.field "tasks" 
+  <| JD.list
+  <| JD.map Task_
+  <| JD.map5 (\id done name body kind -> { id = id, done = done, name = name, body = body, kind = kind, tasks = [] })
+    ("id"   := JD.int   )
+    (JD.succeed False)
+    -- ("done" := JD.bool  )
+    -- TODO: we gotta join the event log
+    ("name" := JD.string)
+    ("body" := JD.string)
+    ( JD.field "kind" JD.string
+    |> JD.andThen taskKindDecoder
+    )
+
+taskKindDecoder kind
+  = case String.toLower kind of
+      "project" -> JD.succeed Project
+      "study"   -> JD.succeed Study
+      "chore"   -> JD.map2 Chore
+                  ("urgent"    := JD.bool) 
+                  ("important" := JD.bool) 
+      _         -> JD.fail <| "could not decode kind: '" ++ kind ++ "'"
 
 -- MAIN ------------------------------------------------------------------------
 
