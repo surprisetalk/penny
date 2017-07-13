@@ -31,8 +31,8 @@ defmodule Penny.RoomChannel do
     end
   end
 
-  def handle_in("mode:set", %{"mode" => mode}, socket) do
-    changeset = Event.changeset(%Event{}, %{"mode" => mode, "event" => "set"})
+  def handle_in("mode:set", mode, socket) do
+    changeset = Event.changeset(%Event{}, %{"mode" => mode, "event" => "SET"})
 
     case Repo.insert(changeset) do
       {:ok, %Event{mode: mode}} ->

@@ -12671,6 +12671,33 @@ var _user$project$Penny$update = F2(
 						_p17,
 						{mode: _p10._0}),
 					{ctor: '[]'});
+			case 'ModeSet':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_p17,
+					{
+						ctor: '::',
+						_0: _user$project$Penny$publish(
+							_elm_lang$core$Json_Encode$object(
+								{
+									ctor: '::',
+									_0: A2(
+										_user$project$Penny_ops['=>'],
+										'topic',
+										_elm_lang$core$Json_Encode$string('mode:set')),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_user$project$Penny_ops['=>'],
+											'body',
+											_elm_lang$core$Json_Encode$string(
+												_elm_lang$core$String$toUpper(
+													_elm_lang$core$Basics$toString(_p10._0)))),
+										_1: {ctor: '[]'}
+									}
+								})),
+						_1: {ctor: '[]'}
+					});
 			case 'ModeSkip':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
@@ -12685,6 +12712,28 @@ var _user$project$Penny$update = F2(
 										_user$project$Penny_ops['=>'],
 										'topic',
 										_elm_lang$core$Json_Encode$string('mode:skip')),
+									_1: {
+										ctor: '::',
+										_0: A2(_user$project$Penny_ops['=>'], 'body', _elm_lang$core$Json_Encode$null),
+										_1: {ctor: '[]'}
+									}
+								})),
+						_1: {ctor: '[]'}
+					});
+			case 'ModeDone':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_p17,
+					{
+						ctor: '::',
+						_0: _user$project$Penny$publish(
+							_elm_lang$core$Json_Encode$object(
+								{
+									ctor: '::',
+									_0: A2(
+										_user$project$Penny_ops['=>'],
+										'topic',
+										_elm_lang$core$Json_Encode$string('mode:fin')),
 									_1: {
 										ctor: '::',
 										_0: A2(_user$project$Penny_ops['=>'], 'body', _elm_lang$core$Json_Encode$null),
@@ -12835,16 +12884,20 @@ var _user$project$Penny$subs = function (model) {
 		});
 };
 var _user$project$Penny$ModeSkip = {ctor: 'ModeSkip'};
+var _user$project$Penny$ModeDone = {ctor: 'ModeDone'};
+var _user$project$Penny$ModeSet = function (a) {
+	return {ctor: 'ModeSet', _0: a};
+};
 var _user$project$Penny$view = function (_p26) {
 	var _p27 = _p26;
-	var _p30 = _p27.tasks;
-	var _p29 = _p27.mode;
+	var _p32 = _p27.tasks;
+	var _p31 = _p27.mode;
 	var stats = A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
 		{ctor: '[]'});
 	var now = function () {
-		var _p28 = _p29;
+		var _p28 = _p31;
 		switch (_p28.ctor) {
 			case 'Frolic':
 				return _elm_lang$html$Html$text('thank you universe!');
@@ -12944,7 +12997,7 @@ var _user$project$Penny$view = function (_p26) {
 						_1: {
 							ctor: '::',
 							_0: _user$project$Penny$viewTasks(
-								A2(_elm_lang$core$List$filter, _user$project$Penny$isProject, _p30)),
+								A2(_elm_lang$core$List$filter, _user$project$Penny$isProject, _p32)),
 							_1: {ctor: '[]'}
 						}
 					});
@@ -12958,7 +13011,7 @@ var _user$project$Penny$view = function (_p26) {
 						_1: {
 							ctor: '::',
 							_0: _user$project$Penny$viewTasks(
-								A2(_elm_lang$core$List$filter, _user$project$Penny$isStudy, _p30)),
+								A2(_elm_lang$core$List$filter, _user$project$Penny$isStudy, _p32)),
 							_1: {ctor: '[]'}
 						}
 					});
@@ -12972,7 +13025,7 @@ var _user$project$Penny$view = function (_p26) {
 						_1: {
 							ctor: '::',
 							_0: _user$project$Penny$viewTasks(
-								A2(_elm_lang$core$List$filter, _user$project$Penny$isChore, _p30)),
+								A2(_elm_lang$core$List$filter, _user$project$Penny$isChore, _p32)),
 							_1: {ctor: '[]'}
 						}
 					});
@@ -13017,6 +13070,474 @@ var _user$project$Penny$view = function (_p26) {
 				return _elm_lang$html$Html$text('zzzzzzzz');
 		}
 	}();
+	var goTo = A2(
+		_elm_lang$html$Html$select,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Events$onInput(
+				function (_p29) {
+					return _user$project$Penny$ModeSet(
+						function (mode) {
+							var _p30 = mode;
+							switch (_p30) {
+								case 'frolic':
+									return _user$project$Penny$Frolic;
+								case 'naught':
+									return _user$project$Penny$Naught;
+								case 'tidy':
+									return _user$project$Penny$Tidy;
+								case 'exercise':
+									return _user$project$Penny$Exercise;
+								case 'fuel':
+									return _user$project$Penny$Fuel;
+								case 'groom':
+									return _user$project$Penny$Groom;
+								case 'inspire':
+									return _user$project$Penny$Inspire;
+								case 'strategize':
+									return _user$project$Penny$Strategize;
+								case 'create':
+									return _user$project$Penny$Create;
+								case 'learn':
+									return _user$project$Penny$Learn;
+								case 'work':
+									return _user$project$Penny$Work;
+								case 'connect':
+									return _user$project$Penny$Connect;
+								case 'consume':
+									return _user$project$Penny$Consume;
+								case 'review':
+									return _user$project$Penny$Review;
+								case 'automate':
+									return _user$project$Penny$Automate;
+								case 'journal':
+									return _user$project$Penny$Journal;
+								case 'read':
+									return _user$project$Penny$Read;
+								case 'sleep':
+									return _user$project$Penny$Sleep;
+								default:
+									return _user$project$Penny$Naught;
+							}
+						}(_p29));
+				}),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$option,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$value('frolic'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$selected(
+							_elm_lang$core$Native_Utils.eq(
+								_elm_lang$core$String$toLower(
+									_elm_lang$core$Basics$toString(_p31)),
+								'frolic')),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('frolic'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$option,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$value('naught'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$selected(
+								_elm_lang$core$Native_Utils.eq(
+									_elm_lang$core$String$toLower(
+										_elm_lang$core$Basics$toString(_p31)),
+									'naught')),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('naught'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$option,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$value('tidy'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$selected(
+									_elm_lang$core$Native_Utils.eq(
+										_elm_lang$core$String$toLower(
+											_elm_lang$core$Basics$toString(_p31)),
+										'tidy')),
+								_1: {ctor: '[]'}
+							}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('tidy'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$option,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$value('exercise'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$selected(
+										_elm_lang$core$Native_Utils.eq(
+											_elm_lang$core$String$toLower(
+												_elm_lang$core$Basics$toString(_p31)),
+											'exercise')),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('exercise'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$option,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$value('fuel'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$selected(
+											_elm_lang$core$Native_Utils.eq(
+												_elm_lang$core$String$toLower(
+													_elm_lang$core$Basics$toString(_p31)),
+												'fuel')),
+										_1: {ctor: '[]'}
+									}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('fuel'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$option,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$value('groom'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$selected(
+												_elm_lang$core$Native_Utils.eq(
+													_elm_lang$core$String$toLower(
+														_elm_lang$core$Basics$toString(_p31)),
+													'groom')),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('groom'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$option,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$value('inspire'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$selected(
+													_elm_lang$core$Native_Utils.eq(
+														_elm_lang$core$String$toLower(
+															_elm_lang$core$Basics$toString(_p31)),
+														'inspire')),
+												_1: {ctor: '[]'}
+											}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('inspire'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$option,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$value('strategize'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$selected(
+														_elm_lang$core$Native_Utils.eq(
+															_elm_lang$core$String$toLower(
+																_elm_lang$core$Basics$toString(_p31)),
+															'strategize')),
+													_1: {ctor: '[]'}
+												}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('strategize'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$option,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$value('create'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$selected(
+															_elm_lang$core$Native_Utils.eq(
+																_elm_lang$core$String$toLower(
+																	_elm_lang$core$Basics$toString(_p31)),
+																'create')),
+														_1: {ctor: '[]'}
+													}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('create'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$option,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$value('learn'),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$selected(
+																_elm_lang$core$Native_Utils.eq(
+																	_elm_lang$core$String$toLower(
+																		_elm_lang$core$Basics$toString(_p31)),
+																	'learn')),
+															_1: {ctor: '[]'}
+														}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('learn'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$option,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$value('work'),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$selected(
+																	_elm_lang$core$Native_Utils.eq(
+																		_elm_lang$core$String$toLower(
+																			_elm_lang$core$Basics$toString(_p31)),
+																		'work')),
+																_1: {ctor: '[]'}
+															}
+														},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('work'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$option,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$value('connect'),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$selected(
+																		_elm_lang$core$Native_Utils.eq(
+																			_elm_lang$core$String$toLower(
+																				_elm_lang$core$Basics$toString(_p31)),
+																			'connect')),
+																	_1: {ctor: '[]'}
+																}
+															},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('connect'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$option,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$value('consume'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$selected(
+																			_elm_lang$core$Native_Utils.eq(
+																				_elm_lang$core$String$toLower(
+																					_elm_lang$core$Basics$toString(_p31)),
+																				'consume')),
+																		_1: {ctor: '[]'}
+																	}
+																},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('consume'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$option,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$value('review'),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$selected(
+																				_elm_lang$core$Native_Utils.eq(
+																					_elm_lang$core$String$toLower(
+																						_elm_lang$core$Basics$toString(_p31)),
+																					'review')),
+																			_1: {ctor: '[]'}
+																		}
+																	},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text('review'),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$option,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$value('automate'),
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$selected(
+																					_elm_lang$core$Native_Utils.eq(
+																						_elm_lang$core$String$toLower(
+																							_elm_lang$core$Basics$toString(_p31)),
+																						'automate')),
+																				_1: {ctor: '[]'}
+																			}
+																		},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text('automate'),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$option,
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$value('journal'),
+																				_1: {
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$selected(
+																						_elm_lang$core$Native_Utils.eq(
+																							_elm_lang$core$String$toLower(
+																								_elm_lang$core$Basics$toString(_p31)),
+																							'journal')),
+																					_1: {ctor: '[]'}
+																				}
+																			},
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html$text('journal'),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {
+																			ctor: '::',
+																			_0: A2(
+																				_elm_lang$html$Html$option,
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$value('read'),
+																					_1: {
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Attributes$selected(
+																							_elm_lang$core$Native_Utils.eq(
+																								_elm_lang$core$String$toLower(
+																									_elm_lang$core$Basics$toString(_p31)),
+																								'read')),
+																						_1: {ctor: '[]'}
+																					}
+																				},
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html$text('read'),
+																					_1: {ctor: '[]'}
+																				}),
+																			_1: {
+																				ctor: '::',
+																				_0: A2(
+																					_elm_lang$html$Html$option,
+																					{
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Attributes$value('sleep'),
+																						_1: {
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Attributes$selected(
+																								_elm_lang$core$Native_Utils.eq(
+																									_elm_lang$core$String$toLower(
+																										_elm_lang$core$Basics$toString(_p31)),
+																									'sleep')),
+																							_1: {ctor: '[]'}
+																						}
+																					},
+																					{
+																						ctor: '::',
+																						_0: _elm_lang$html$Html$text('sleep'),
+																						_1: {ctor: '[]'}
+																					}),
+																				_1: {ctor: '[]'}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
 	return A2(
 		_elm_lang$html$Html$main_,
 		{ctor: '[]'},
@@ -13029,7 +13550,7 @@ var _user$project$Penny$view = function (_p26) {
 					ctor: '::',
 					_0: _elm_lang$html$Html$text(
 						_elm_lang$core$String$toUpper(
-							_elm_lang$core$Basics$toString(_p29))),
+							_elm_lang$core$Basics$toString(_p31))),
 					_1: {
 						ctor: '::',
 						_0: A2(
@@ -13058,7 +13579,22 @@ var _user$project$Penny$view = function (_p26) {
 										_0: _elm_lang$html$Html$text('skip'),
 										_1: {ctor: '[]'}
 									}),
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$button,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(_user$project$Penny$ModeDone),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('done'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
 							}),
 						_1: {ctor: '[]'}
 					}
@@ -13070,20 +13606,31 @@ var _user$project$Penny$view = function (_p26) {
 					{ctor: '[]'},
 					{
 						ctor: '::',
-						_0: now,
+						_0: goTo,
 						_1: {ctor: '[]'}
 					}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$aside,
+						_elm_lang$html$Html$div,
 						{ctor: '[]'},
 						{
 							ctor: '::',
-							_0: stats,
+							_0: now,
 							_1: {ctor: '[]'}
 						}),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$aside,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: stats,
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
 				}
 			}
 		});
@@ -13096,7 +13643,7 @@ var _user$project$Penny$NoOp = {ctor: 'NoOp'};
 var Elm = {};
 Elm['Penny'] = Elm['Penny'] || {};
 if (typeof _user$project$Penny$main !== 'undefined') {
-    _user$project$Penny$main(Elm['Penny'], 'Penny', {"types":{"unions":{"Penny.Kind":{"args":[],"tags":{"Project":[],"Study":[],"Chore":["Bool","Bool"]}},"Penny.Msg":{"args":[],"tags":{"TasksUpdate":["List Penny.Task"],"ModeSkip":[],"ModeUpdate":["Penny.Mode"],"Undo":[],"Push":["Penny.Notification"],"NoOp":[]}},"Penny.Mode":{"args":[],"tags":{"Learn":[],"Sleep":[],"Read":[],"Inspire":[],"Frolic":[],"Groom":[],"Tidy":[],"Connect":[],"Journal":[],"Consume":[],"Strategize":[],"Create":[],"Review":[],"Automate":[],"Fuel":[],"Exercise":[],"Work":[],"Naught":[]}},"Penny.Task":{"args":[],"tags":{"Task_":["{ id : Int , done : Bool , name : String , body : String , kind : Penny.Kind , tasks : List Penny.Task }"]}}},"aliases":{"Penny.Notification":{"args":[],"type":"{}"}},"message":"Penny.Msg"},"versions":{"elm":"0.18.0"}});
+    _user$project$Penny$main(Elm['Penny'], 'Penny', {"types":{"unions":{"Penny.Kind":{"args":[],"tags":{"Project":[],"Study":[],"Chore":["Bool","Bool"]}},"Penny.Msg":{"args":[],"tags":{"TasksUpdate":["List Penny.Task"],"ModeSkip":[],"ModeDone":[],"ModeUpdate":["Penny.Mode"],"Undo":[],"Push":["Penny.Notification"],"NoOp":[],"ModeSet":["Penny.Mode"]}},"Penny.Mode":{"args":[],"tags":{"Learn":[],"Sleep":[],"Read":[],"Inspire":[],"Frolic":[],"Groom":[],"Tidy":[],"Connect":[],"Journal":[],"Consume":[],"Strategize":[],"Create":[],"Review":[],"Automate":[],"Fuel":[],"Exercise":[],"Work":[],"Naught":[]}},"Penny.Task":{"args":[],"tags":{"Task_":["{ id : Int , done : Bool , name : String , body : String , kind : Penny.Kind , tasks : List Penny.Task }"]}}},"aliases":{"Penny.Notification":{"args":[],"type":"{}"}},"message":"Penny.Msg"},"versions":{"elm":"0.18.0"}});
 }
 
 if (typeof define === "function" && define['amd'])

@@ -120,6 +120,8 @@ init _
 
 type Msg = NoOp
          | Undo             
+         | ModeSet Mode
+         | ModeDone
          | ModeSkip
          | ModeUpdate Mode
          | TasksUpdate (List Task)
@@ -147,12 +149,32 @@ update msg ({mode,tasks} as model)
 
         { model | mode = mode } ! []
 
+      ModeSet mode ->
+
+        model
+        ! [ publish
+            <| JE.object
+              [ "topic" => JE.string "mode:set"
+              , "body"  => (JE.string <| String.toUpper <| toString <| mode)
+              ]
+          ]
+
       ModeSkip ->
 
         model
         ! [ publish
             <| JE.object
               [ "topic" => JE.string "mode:skip"
+              , "body"  => JE.null
+              ]
+          ]
+
+      ModeDone ->
+
+        model
+        ! [ publish
+            <| JE.object
+              [ "topic" => JE.string "mode:fin"
               , "body"  => JE.null
               ]
           ]
@@ -220,7 +242,53 @@ viewTasks tasks
 
 view : Model -> Html Msg
 view {mode,tasks}
-  = let now : Html Msg
+  = let goTo : Html Msg
+        goTo
+          = select [ onInput
+                     <| ModeSet
+                     << \mode ->
+                       case mode of
+                         "frolic"     -> Frolic     
+                         "naught"     -> Naught     
+                         "tidy"       -> Tidy       
+                         "exercise"   -> Exercise   
+                         "fuel"       -> Fuel       
+                         "groom"      -> Groom      
+                         "inspire"    -> Inspire    
+                         "strategize" -> Strategize 
+                         "create"     -> Create     
+                         "learn"      -> Learn      
+                         "work"       -> Work       
+                         "connect"    -> Connect    
+                         "consume"    -> Consume    
+                         "review"     -> Review     
+                         "automate"   -> Automate   
+                         "journal"    -> Journal    
+                         "read"       -> Read       
+                         "sleep"      -> Sleep      
+                         _            -> Naught
+                   ]
+            [ option [ value "frolic"    , selected <| String.toLower (toString mode) == "frolic"     ] [ text "frolic"     ]
+            , option [ value "naught"    , selected <| String.toLower (toString mode) == "naught"     ] [ text "naught"     ]
+            , option [ value "tidy"      , selected <| String.toLower (toString mode) == "tidy"       ] [ text "tidy"       ]
+            , option [ value "exercise"  , selected <| String.toLower (toString mode) == "exercise"   ] [ text "exercise"   ]
+            , option [ value "fuel"      , selected <| String.toLower (toString mode) == "fuel"       ] [ text "fuel"       ]
+            , option [ value "groom"     , selected <| String.toLower (toString mode) == "groom"      ] [ text "groom"      ]
+            , option [ value "inspire"   , selected <| String.toLower (toString mode) == "inspire"    ] [ text "inspire"    ]
+            , option [ value "strategize", selected <| String.toLower (toString mode) == "strategize" ] [ text "strategize" ]
+            , option [ value "create"    , selected <| String.toLower (toString mode) == "create"     ] [ text "create"     ]
+            , option [ value "learn"     , selected <| String.toLower (toString mode) == "learn"      ] [ text "learn"      ]
+            , option [ value "work"      , selected <| String.toLower (toString mode) == "work"       ] [ text "work"       ]
+            , option [ value "connect"   , selected <| String.toLower (toString mode) == "connect"    ] [ text "connect"    ]
+            , option [ value "consume"   , selected <| String.toLower (toString mode) == "consume"    ] [ text "consume"    ]
+            , option [ value "review"    , selected <| String.toLower (toString mode) == "review"     ] [ text "review"     ]
+            , option [ value "automate"  , selected <| String.toLower (toString mode) == "automate"   ] [ text "automate"   ]
+            , option [ value "journal"   , selected <| String.toLower (toString mode) == "journal"    ] [ text "journal"    ]
+            , option [ value "read"      , selected <| String.toLower (toString mode) == "read"       ] [ text "read"       ]
+            , option [ value "sleep"     , selected <| String.toLower (toString mode) == "sleep"      ] [ text "sleep"      ]
+            ]
+
+        now : Html Msg
         now = case mode of
 
             Frolic ->
@@ -440,7 +508,11 @@ view {mode,tasks}
          [ mode |> toString |> String.toUpper |> text
          , span [ style [ "font-size" => "14pt" ] ]
            [ button [ onClick ModeSkip ] [ text "skip" ]
+           , button [ onClick ModeDone ] [ text "done" ]
            ]
+         ]
+       , div []
+         [ goTo
          ]
        , div []
          [ now

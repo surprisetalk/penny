@@ -15,7 +15,7 @@ defmodule Penny.Mode.Event do
     struct
     |> cast(params, [:mode, :event])
     |> validate_required([:mode, :event])
-    |> validate_inclusion(:event, [ "SET", "SKIP", "CRON", "CONTEXT" ])
+    |> validate_inclusion(:event, [ "SET", "SKIP", "DONE", "CRON", "CONTEXT" ])
     # TODO: |> validate_inclusion(:mode, [])
   end
 end
