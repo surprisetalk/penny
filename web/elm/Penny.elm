@@ -6,6 +6,11 @@ TODO: everything should be insert-only events
 
 -}
 
+-- TODO: work in 30-minute units
+-- TODO:   must "check in" units?
+-- TODO:      units should have proof or analysis?
+-- TODO:         easy as checkboxes, hard as blog entries
+
 -- IMPORTS ---------------------------------------------------------------------
 
 import Html exposing (..)
