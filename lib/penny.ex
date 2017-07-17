@@ -1,31 +1,18 @@
 defmodule Penny do
-  use Application
+  @moduledoc """
+  Documentation for Penny.
+  """
 
-  # See http://elixir-lang.org/docs/stable/elixir/Application.html
-  # for more information on OTP Applications
-  def start(_type, _args) do
-    import Supervisor.Spec
+  @doc """
+  Hello world.
 
-    # Define workers and child supervisors to be supervised
-    children = [
-      # Start the Ecto repository
-      supervisor(Penny.Repo, []),
-      # Start the endpoint when the application starts
-      supervisor(Penny.Endpoint, []),
-      # Start your own worker by calling: Penny.Worker.start_link(arg1, arg2, arg3)
-      # worker(Penny.Worker, [arg1, arg2, arg3]),
-    ]
+  ## Examples
 
-    # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
-    # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Penny.Supervisor]
-    Supervisor.start_link(children, opts)
-  end
+      iex> Penny.hello
+      :world
 
-  # Tell Phoenix to update the endpoint configuration
-  # whenever the application is updated.
-  def config_change(changed, _new, removed) do
-    Penny.Endpoint.config_change(changed, removed)
-    :ok
+  """
+  def hello do
+    :world
   end
 end
