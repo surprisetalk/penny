@@ -13,7 +13,9 @@ defmodule Penny.Application do
       # Starts a worker by calling: Penny.Worker.start_link(arg1, arg2, arg3)
       # worker(Penny.Worker, [arg1, arg2, arg3]),
       worker(Mongo, [[name: :mongo, database: "penny"]]),
-      worker(Penny.Api, [])
+      Plug.Adapters.Cowboy.child_spec(:http, Penny.Api, [], [
+            dispatch: dispatch
+          ])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
@@ -21,4 +23,16 @@ defmodule Penny.Application do
     opts = [strategy: :one_for_one, name: Penny.Supervisor]
     Supervisor.start_link(children, opts)
   end
-end
+
+  defp dispatch do
+    [
+      {
+        :_,
+        [
+          {"/ws", Penny.Socket, []},
+          {:_, Plug.Adapters,Cowboy.Handler, {Penny.Api, []}}
+        ]
+      }
+    ]
+
+  end

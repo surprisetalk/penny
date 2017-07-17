@@ -2,13 +2,15 @@ defmodule Penny.Api do
   use Plug.Router
   require Logger
 
+  # TODO: it's going to be easier to stick this in a phoenix app with --no-ecto
+  # TODO: then we'll be able to create simpler models and use websockets
+
   plug Plug.Logger
   plug :match
   plug :dispatch
 
   plug Plug.Parsers,
-    parsers: [:json],
-    pass: ["text/*"],
+    parsers: [:urlencoded, :json],
     json_decoder: Poison
 
   def init(options) do
@@ -42,6 +44,19 @@ defmodule Penny.Api do
 
     conn
     |> send_resp(201, "")
+    |> halt
+  end
+
+  get "/tasks" do
+    :mongo
+    |> Mongo.find("tasks", %{})
+    |> Enum.to_list
+    |> inspect
+    |> IO.puts
+
+    conn
+    |> put_resp_content_type("application/json")
+    |> send_resp(200, Poison.encode!(%{name: "tay"}))
     |> halt
   end
 
