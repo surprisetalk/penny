@@ -418,6 +418,8 @@ view {mode,tasks,newTaskName}
 
             Learn ->
 
+              -- TODO: move to flash repo
+
               -- TODO: studies list & github stuff
               -- TODO: integrate spaced-repetition quizzes, etc
               -- TODO:   vim
@@ -427,6 +429,7 @@ view {mode,tasks,newTaskName}
               -- TODO:     "good" notes (on guitar and piano)
               -- TODO:     scale relations
               -- TODO:     ear training
+              -- TODO:     transcription
               -- TODO:   chem
               -- TODO:     elements
               -- TODO:     "household" compounds (everyday things)
